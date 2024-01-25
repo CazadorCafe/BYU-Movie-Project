@@ -2,11 +2,9 @@ const express = require("express");
 const axios = require("axios");
 
 const app = express();
-const PORT = 3000; // You can change the port as needed
+const PORT = 3000; 
 
 app.get('/movies', async (req, res) => {
-    console.log('Received request to /movies'); // Add this line
-
   try {
     const { search } = req.query;
     console.log(search);
@@ -22,7 +20,6 @@ app.get('/movies', async (req, res) => {
 
     console.log('TMDB API Response:', tmdbApiResponse.data);
 
-    // Check if the response contains the expected 'results' property
     if (!tmdbApiResponse.data.results) {
       return res.status(500).json({ error: 'Unexpected response from TMDB API' });
     }
@@ -35,10 +32,8 @@ app.get('/movies', async (req, res) => {
     }));
     const acceptHeader = req.headers.accept || '';
     if (acceptHeader.includes('application/json')) {
-      // Respond with JSON data
       res.json(movies);
     } else {
-      // Respond with HTML for non-JSON requests
       res.send('<html><body><h1>Nuxt.js HTML Content</h1></body></html>');
     }
   } catch (error) {

@@ -10,7 +10,6 @@
           <h2>{{ movie.title }}</h2>
           <img :src="movie.poster_image_url" alt="Movie Poster" />
           <p>{{ movie.popularity_summary }}</p>
-          <!-- Recommendations can be added here -->
         </div>
       </div>
     </div>
@@ -36,11 +35,9 @@
       console.log('Movies:', this.movies);
     } else {
       console.error('Invalid response format:', response);
-      // Handle invalid response format
     }
   } catch (error) {
     console.error('Error:', error);
-    // Handle error, show message to user, etc.
   }
       },
     },
@@ -48,7 +45,6 @@
   </script>
   
   <style scoped>
-  /* Add your styling here using Flexbox or any other preferred method */
   .movie-card {
     border: 1px solid #ccc;
     padding: 10px;
