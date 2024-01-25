@@ -19,6 +19,9 @@ $ npm run generate
 
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
 
+## Instruction
+I was able to implement a back end and a front end. Seeing how a lot of what I was working with was new I was unable to finish the entire project. If you run the front-end and then run the back-end and then stop running the front end the search works and it all works to get the information. The problem is if you refresh the browser then it stops working because it is closed. I wasn't able to get it to flow with the backend without doing this. Thanks for taking the time and for having me under consideration. I hope that I am able to show you more of what I am capable of and that I am a fast learner and I am willing to learn whatever is required.
+
 ## Special Directories
 
 You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
