@@ -1,41 +1,37 @@
+//added this so I could have the api key more secure
+require("dotenv").config();
 const express = require("express");
 const axios = require("axios");
+//added in cors that adds in a security feature implemented by web browsers
+
+const cors = require("cors");
 
 const app = express();
-const PORT = 3000; 
+//changed to port 4000 so it doesn't conflict with the frontend
+const PORT = process.env.PORT || 4000;
 
-app.get('/movies', async (req, res) => {
+app.use(cors());
+
+app.get("/movies", async (req, res) => {
   try {
     const { search } = req.query;
-    console.log(search);
+    //changed the API_KEY to be better protected
+    const apiKey = process.env.API_KEY;
 
-    if (!search) {
-      return res.status(400).json({ error: "Search query is required" });
-    }
-
-    const apiKey = "2a749fff70953b600737e8b54b24655a";
-    const baseUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${search}`;
+    const baseUrl = `https://api.themoviedb.org/3/search/movie?query=${search}&api_key=${apiKey}&include_adult=false&language=en-US&region=US`;
 
     const tmdbApiResponse = await axios.get(baseUrl);
 
-    console.log('TMDB API Response:', tmdbApiResponse.data);
-
-    if (!tmdbApiResponse.data.results) {
-      return res.status(500).json({ error: 'Unexpected response from TMDB API' });
-    }
+    console.log("TMDB API Response:", tmdbApiResponse.data);
 
     const movies = tmdbApiResponse.data.results.slice(0, 10).map((movie) => ({
       movie_id: movie.id,
       title: movie.title,
-      poster_image_url: `https://developers.themoviedb.org/3/getting-started/images${movie.poster_path}`,
+      //fixed the photo path to use the right one
+      poster_image_url: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
       popularity_summary: `${movie.popularity} out of ${movie.vote_count}`,
     }));
-    const acceptHeader = req.headers.accept || '';
-    if (acceptHeader.includes('application/json')) {
-      res.json(movies);
-    } else {
-      res.send('<html><body><h1>Nuxt.js HTML Content</h1></body></html>');
-    }
+    res.json(movies);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });

@@ -26,19 +26,16 @@
     methods: {
       async searchMovies() {
         try {
-            console.log(this.searchQuery)
-    const response = await this.$axios.get(`/movies?search=${this.searchQuery}`);
-    console.log('Backend response:', response.data);
-
-    if (response.data) {
-      this.movies = response.data;
-      console.log('Movies:', this.movies);
-    } else {
-      console.error('Invalid response format:', response);
-    }
-  } catch (error) {
-    console.error('Error:', error);
-  }
+        <!-- Installed Axios into the front end -->
+          const response = await this.$axios.get(`/movies?search=${this.searchQuery}`);
+          if (response.data) {
+            this.movies = response.data;
+          } else {
+            console.error('Invalid response format:', response);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
       },
     },
   };

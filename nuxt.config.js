@@ -34,7 +34,7 @@ export default {
   buildModules: ['@nuxtjs/axios',],
 
   axios: {
-    baseURL: 'http://localhost:3000', // Replace with the actual base URL of your backend
+    baseURL: 'http://localhost:4000', // Replace with the actual base URL of your backend
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
